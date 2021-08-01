@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Navbar from "./components/Nav";
+import Auth from "./components/Auth";
 import Home from "./components/Home";
 
 type AppState = {
@@ -25,6 +27,7 @@ type AppState = {
       }
       this.updateToken = this.updateToken.bind(this);
       this.clearSession = this.clearSession.bind(this);
+      this.getUserId = this.getUserId.bind(this);
     }
   
     componentDidMount(){
@@ -39,35 +42,51 @@ type AppState = {
       localStorage.setItem('role', newRole)
       this.setState({sessionToken: newToken, sessionID: newUserId, sessionRole: newRole, isUserAuthenticated: true})
     }
+
+    getUserId() {
+      return this.state.sessionID;
+    }
   
     clearSession(){
       localStorage.clear();
       this.setState({sessionToken: '', isUserAuthenticated: false})
     }
   
-  //   protectedViews(){
-  //     return (
+    protectedViews(){
+      // return(
+      //   <Router>
+      //     <Navbar />
+          
+      //   </Router>
+      // )
 
-  //     );
-  //     // return(localStorage.token === this.state.sessionToken && this.state.sessionToken !== '' ? 
-  //     // <Router>
-  //     //     <NavBar clickLogout={this.clearSession} isUserAuthenticated={this.state.isUserAuthenticated} />
-  //     // </Router>
-  //     // : <Auth updateToken={this.updateToken} />)
-  //     {/* {this.protectedViews()} */}
-
-  // }
-    
-    render(){   
-      return (
-        <div className="App">
-          {/* <Router> */}
-            <Home />
-          {/* </Router> */}
-        </div>
-      );
+      return(localStorage.token === this.state.sessionToken && this.state.sessionToken !== '' ?
+        <Router>
+          <Navbar clickLogout={this.clearSession} isUserAuthenticated={this.state.isUserAuthenticated} sessionToken={this.state.sessionToken} sessionID={this.getUserId}/>
+        </Router> 
+        
+        : <Auth updateToken={this.updateToken} /> )
     }
+    
+  render(){
+    let view;
+
+    if(this.state.isUserAuthenticated){
+      view = (<Router>
+      <Navbar clickLogout={this.clearSession} isUserAuthenticated={this.state.isUserAuthenticated} sessionToken={this.state.sessionToken} sessionID={this.getUserId}/><h1>Component</h1>
+    </Router> )
+    } else {
+      view = <Auth updateToken={this.updateToken} />
+    }
+
+    return (
+      <div className="App">
+      {view}
+     
+      </div>
+    );
   }
+}
   
   export default App;
 

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-
+import LandlordGet from './LandlordGet';
 
 type AcceptedProps = {
-    
+    sessionToken: string | null;
 }
 
-type LandlordState = {
+type LandlordGetState = {
     
 
 }
 
-export default class Landlord extends Component  <AcceptedProps, LandlordState> {
+export default class LandlordDisplay extends Component  <AcceptedProps, LandlordGetState> {
     constructor(props: AcceptedProps) {
     super(props);
     // this.state = {
@@ -19,8 +19,9 @@ export default class Landlord extends Component  <AcceptedProps, LandlordState> 
     render () {
         return (
             <div className="Container">
-                <div className="LandlordWrapper">
-                    landlord page
+                <div className="LandlordIndexWrapper">
+                    LandlordIndex page
+                    {/* <LandlordGet userData={this.state.userData}/> */}
                 </div>
             </div>
         )

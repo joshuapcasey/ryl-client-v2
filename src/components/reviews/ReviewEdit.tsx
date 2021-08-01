@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 
 type AcceptedProps = {
-    
+    sessionToken: string | null;
+
 }
 
 type ReviewEditState = {

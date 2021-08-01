@@ -6,6 +6,11 @@
       "dom.iterable",
       "esnext"
     ],
+    // added typeRoots to fix images
+    "typeRoots" : [
+      "node_modules/@types", 
+      "src/types"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

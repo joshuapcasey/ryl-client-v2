@@ -5,12 +5,12 @@ type AcceptedProps = {
     
 }
 
-type UserProfileState = {
+type UserIndexState = {
     
 
 }
 
-export default class UserProfile extends Component  <AcceptedProps, UserProfileState> {
+export default class UserIndex extends Component  <AcceptedProps, UserIndexState> {
     constructor(props: AcceptedProps) {
     super(props);
     // this.state = {
@@ -19,11 +19,12 @@ export default class UserProfile extends Component  <AcceptedProps, UserProfileS
     render () {
         return (
             <div className="Container">
-                <div className="UserProfileWrapper">
-                    UserProfile page
+                <div className="UserIndexWrapper">
+                    UserIndex page
                 </div>
             </div>
         )
     }
 
 }
+

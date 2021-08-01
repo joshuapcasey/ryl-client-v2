@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Nav from './Nav';
 import Main from './Main';
 import Footer from './Footer'
+
+// import Login from "./auth/Login";
+// import Register from "./auth/Register";
+// import Landlord from "./landlord/LandlordDisplay";
+// import Profile from "./user/UserDisplay";
 
 type AcceptedProps = {
     // updateToken: (newToken: string, newUserId: number, newRole: string) => void
@@ -24,11 +29,11 @@ export default class Home extends Component   <AcceptedProps, HomeState> {
             <div className="Container">
                 <div className="HomeWrapper">
                     Homepage
-                <Router>
-                    <Nav />
+                    {/* <Router>
+                        <Nav />
+                    </Router> */}
                     <Main />
-                </Router>
-                <Footer />
+                    <Footer />
                 </div>
             </div>
         )
