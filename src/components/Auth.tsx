@@ -62,7 +62,7 @@ const LoaderDiv = styled.div`
 
 
 type AcceptedProps = {
-    updateToken: (newToken: string, newUserId: number, newRole: string) => void
+    updateToken: (newToken: string, newUserId: number, isAdmin: boolean) => void
 }
 
 type LandingState = {

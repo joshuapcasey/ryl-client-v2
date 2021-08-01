@@ -8,7 +8,7 @@ import Home from "./components/Home";
 type AppState = {
   sessionToken: string | null,
   sessionID: number | null,
-  sessionRole: string,
+  admin: boolean,
   isUserAuthenticated: boolean
   }
   
@@ -22,7 +22,7 @@ type AppState = {
       this.state={
         sessionToken: null,
         sessionID: null,
-        sessionRole: '',
+        admin: false,
         isUserAuthenticated: false
       }
       this.updateToken = this.updateToken.bind(this);
@@ -36,11 +36,15 @@ type AppState = {
       }
     }
   
-    updateToken(newToken: string, newUserId: number, newRole: string){
+    updateToken(newToken: string, newUserId: number, isAdmin: boolean){
       localStorage.setItem('token', newToken);
       localStorage.setItem('userId', newUserId.toString());
-      localStorage.setItem('role', newRole)
-      this.setState({sessionToken: newToken, sessionID: newUserId, sessionRole: newRole, isUserAuthenticated: true})
+      if(isAdmin){
+        localStorage.setItem("admin", "true");
+      } else {
+        localStorage.setItem("admin", "false");
+      }
+      this.setState({sessionToken: newToken, sessionID: newUserId, admin: isAdmin, isUserAuthenticated: true})
     }
 
     getUserId() {

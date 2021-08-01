@@ -28,7 +28,7 @@ const LoaderDiv = styled.div`
     height: 100%;
 `
 type AcceptedProps={
-    updateToken: (newToken: string, newUserId: number, newRole: string) => void,
+    updateToken: (newToken: string, newUserId: number, isAdmin: boolean) => void,
     changeView: () => void,
     handleTryIt: ()=>void
 }

@@ -55,7 +55,7 @@ export default class UserProfile extends Component  <AcceptedProps, UserProfileS
 
     }
     componentDidMount() {
-        console.log(this.props.sessionID);
+        console.log(`Session Id: ${this.props.sessionID()}`);
         
         this.fetchUserInfo();
     }
@@ -69,12 +69,12 @@ export default class UserProfile extends Component  <AcceptedProps, UserProfileS
             // const res = await fetch(`${APIURL}/user/profile${ID}`, {
             // const res = await fetch(`${APIURL}/user/profile`, {
 
-            const res = await fetch(`${APIURL}/user/profile/${this.props.sessionID}`, {
+            const res = await fetch(`${APIURL}/user/profile/${this.props.sessionID()}`, {
                 method: "GET",
                 headers: requestHeaders,
             });
             const data = await res.json();
-                console.log(`User Profile Data: ${data.userProfile}`);
+                console.log(`User Profile Data: ${data.thisUser.id}`);
                 console.log(data);
                 
             // this.setState({userData: data.userProfile})
