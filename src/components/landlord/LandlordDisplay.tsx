@@ -1,30 +1,89 @@
-import React, { Component } from 'react';
-import LandlordGet from './LandlordGet';
+import React, { Component } from "react";
+import APIURL from '../../helpers/environment';
+import LandlordEdit from './LandlordEdit';
+import LandlordDelete from './LandlordDelete';
 
 type AcceptedProps = {
-    sessionToken: string | null;
-}
+  sessionToken: string | null
+};
 
-type LandlordGetState = {
-    
+type LandlordDisplayState = {
+    landlords: Landlord[]
+    propertyManagement: string;
+    rating: number;
+};
 
-}
-
-export default class LandlordDisplay extends Component  <AcceptedProps, LandlordGetState> {
-    constructor(props: AcceptedProps) {
+export default class LandlordDisplay extends Component<
+  AcceptedProps,
+  LandlordDisplayState
+> {
+  constructor(props: AcceptedProps) {
     super(props);
-    // this.state = {
-    }
+    this.state = {
+      landlords: [],
+      propertyManagement: "",
+        rating: 0
+    };
+  }
+  componentDidMount() {
+    this.fetchLandlords();
+  }
 
-    render () {
-        return (
-            <div className="Container">
-                <div className="LandlordIndexWrapper">
-                    LandlordIndex page
-                    {/* <LandlordGet userData={this.state.userData}/> */}
-                </div>
-            </div>
-        )
+  fetchLandlords = async () => {
+    let requestHeaders: any = {
+      "Content-Type": "application/json",
+      Authorization: this.props.sessionToken,
+    };
+    try {
+      const res = await fetch(`${APIURL}/landlord/all`, {
+        method: "GET",
+        headers: requestHeaders,
+      });
+      const data = await res.json();
+      console.log(`Landlord Data: ${data.allLandlords[0].propertyManagement}`);
+      this.setState({ landlords: data.allLandlords });
+      console.log(this.state);
+    } catch (err) {
+      console.log(err);
     }
+  };
 
+  render() {
+    return (
+      <div className="list-group">
+        <table className="table table-hover table-dark">
+          <thead>
+            <tr className="bg-primary">
+              <th scope="col">Property Management</th>
+              <th scope="col">Rating</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+              {/* <LandlordDelete id={landlord.id} sessionToken={this.props.sessionToken}/> */}
+            </tr>
+          </thead>
+          <tbody>
+            {
+              this.state.landlords.map((landlord: Landlord, index: number) => {
+                return (
+                  <tr
+                    
+                  >
+                    <td>{landlord.propertyManagement}</td>
+                    <td>{landlord.rating}</td>
+                    {/* <td>{"$".repeat(landlord.price_range)}</td> */}
+                    {/* <td>{renderRating(landlord)}</td> */}
+                    <td>
+                     <LandlordEdit id={landlord.id} propertyManagement={landlord.propertyManagement} rating={landlord.rating} sessionToken={this.props.sessionToken} />
+                    </td>
+                    <td>
+                      <LandlordDelete id={landlord.id} sessionToken={this.props.sessionToken}/>
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 }

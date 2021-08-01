@@ -5,12 +5,13 @@ import { Link, Route, Switch } from 'react-router-dom';
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Home from "./Home";
-import Landlord from "./landlord/LandlordGet";
+import Landlord from "./landlord/LandlordDisplay";
 import Profile from "./user/UserGet";
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Review from './reviews/ReviewGet';
+import LandlordDisplay from './landlord/LandlordDisplay';
 
 type AcceptedProps = {
     clickLogout: () => void,
@@ -80,7 +81,7 @@ const NavBar = (props: AcceptedProps) => {
                     <Switch>
                         {/* <Route exact path="/login" component={ Login } /> */}
                         <Route exact path="/home" component={ Home } />
-                        <Route exact path="/landlords"  ><Landlord sessionToken={props.sessionToken}/></Route>
+                        <Route exact path="/landlords"  ><LandlordDisplay sessionToken={props.sessionToken}/></Route>
                         <Route exact path="/reviews" ><Review  sessionToken={props.sessionToken}/></Route>
                         <Route exact path="/profile" ><Profile sessionID={props.sessionID} sessionToken={props.sessionToken}/></Route>
                     </Switch>
@@ -88,7 +89,6 @@ const NavBar = (props: AcceptedProps) => {
                 </div>
             </div>
         );
-    // };
 }
 
 export default NavBar;
