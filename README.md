@@ -14,4 +14,5 @@ RYL utilizes 3 tables from the server and lets the user Create, Read, Update, an
 Admins have the ability to Update and Delete on two of the tables as well. 
 
 ### Data Storage and Transfer
-The data is encrypted and pulls from a server deployed with Heroku. You can view the production application here => [RYL App](heroku-app-link) or the source code for the back-end here => [RYL Server](heroku-server-link)
+The data is encrypted and pulls from a server deployed with Heroku. You can view the production application here => [RYL App](heroku-app-link) or the source code for the back-end here => [RYL Server](https://github.com/joshuapcasey/ryl-server)
+
