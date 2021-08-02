@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import APIURL from "../../helpers/environment";
+import ReviewDelete from './ReviewDelete';
+import ReviewEdit from './ReviewEdit';
 
 
 type AcceptedProps = {
     sessionToken: string | null;
+    sessionID: number | null;
 };
 
 type ReviewDisplayState = {
@@ -12,7 +15,7 @@ type ReviewDisplayState = {
     propertyAddress: string;
     rent: number;
     comment: string;
-    //! reviewerID: number;
+    reviewerID: number;
 }
 
 export default class ReviewDisplay extends Component  <AcceptedProps, ReviewDisplayState> {
@@ -24,12 +27,15 @@ export default class ReviewDisplay extends Component  <AcceptedProps, ReviewDisp
         propertyAddress: '',
         rent: 0,
         comment: '',
+        reviewerID: 0
+
         };
         this.fetchReviews = this.fetchReviews.bind(this);
     }
 
     componentDidMount() {
         console.log("Mounting Reviews");
+        console.log(this.props.sessionID)
         this.fetchReviews();
     }
 
@@ -42,17 +48,17 @@ export default class ReviewDisplay extends Component  <AcceptedProps, ReviewDisp
         
         try {
             console.log("function hit")
-        const res = await fetch(`http://localhost:4001/review/all`, {
+        const res = await fetch(`${APIURL}/review/userreviews/${this.props.sessionID}`, {
             method: "GET",
             headers: requestHeaders
         });
         console.log(`Res: ${res}`)
 
         const data = await res.json();
-        console.log(`Review Data: ${data.allReviews[0].comment}`);
-        console.log(`Review Data: ${data.allReviews[5].comment}`);
+        console.log(`Review Data: ${data.userReviews[0]}`);
+        console.log(`Review Data: ${data.userReviews[5]}`);
 
-        this.setState({reviews: data.allReviews})
+        this.setState({reviews: data.userReviews})
         console.log(this.state)
 
         } catch (err) {
@@ -81,6 +87,22 @@ export default class ReviewDisplay extends Component  <AcceptedProps, ReviewDisp
                         </div>
                         <div className="card-body">
                             <p className="card-text">{review.comment}</p>
+                        </div>
+                        <div className="card-footer">
+                            <span><ReviewEdit
+                            id={review.id}
+                                landlordID={review.landlordID}
+                                sessionToken={this.props.sessionToken}
+                                propertyAddress={review.propertyAddress}
+                                rent={review.rent}
+                                comment={review.comment}
+                                />
+                            </span>
+                            <span><ReviewDelete
+                            id={review.id}
+                            sessionToken={this.props.sessionToken}
+                                />
+                            </span>
                         </div>
                     </div>
                     );

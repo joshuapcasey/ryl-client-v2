@@ -4,7 +4,7 @@ import APIURL from "../../helpers/environment";
 
 type AcceptedProps = {
     sessionToken: string | null;
-    sessionID: () => number | null;
+    sessionID: number | null;
 }
 
 type UserProfileState = {
@@ -55,7 +55,7 @@ export default class UserProfile extends Component  <AcceptedProps, UserProfileS
 
     }
     componentDidMount() {
-        console.log(`Session ID: ${this.props.sessionID()}`);
+        console.log(`Session ID: ${this.props.sessionID}`);
         
         this.fetchUserInfo();
     }
@@ -69,7 +69,7 @@ export default class UserProfile extends Component  <AcceptedProps, UserProfileS
             // const res = await fetch(`${APIURL}/user/profile${ID}`, {
             // const res = await fetch(`${APIURL}/user/profile`, {
 
-            const res = await fetch(`${APIURL}/user/profile/${this.props.sessionID()}`, {
+            const res = await fetch(`${APIURL}/user/profile/${this.props.sessionID}`, {
                 method: "GET",
                 headers: requestHeaders,
             });

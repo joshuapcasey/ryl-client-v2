@@ -3,6 +3,7 @@ import APIURL from "../../helpers/environment";
 import LandlordEdit from "./LandlordEdit";
 import LandlordDelete from "./LandlordDelete";
 import LandlordAdd from "./LandlordAdd";
+import LandlordDetail from './LandlordDetail';
 
 type AcceptedProps = {
   sessionToken: string | null;
@@ -50,6 +51,20 @@ export default class LandlordDisplay extends Component<
   };
 
   render() {
+    let adminViewOne;
+
+    let admin = localStorage.getItem("admin");
+    if (admin === "true") {
+      adminViewOne = (
+        <>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </>
+      );
+    } else {
+      adminViewOne = null;
+    }
+
     return (
       <div className="list-group">
         <table className="table table-hover table-dark">
@@ -57,8 +72,7 @@ export default class LandlordDisplay extends Component<
             <tr className="bg-primary">
               <th scope="col">Property Management</th>
               <th scope="col">Rating</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Delete</th>
+              {adminViewOne}
               {/* <LandlordAdd
                 id={this.state.id}
                 propertyManagement={this.state.propertyManagement}
@@ -71,9 +85,12 @@ export default class LandlordDisplay extends Component<
             {this.state.landlords.map((landlord: Landlord, index: number) => {
               return (
                 <tr>
-                  <td>{landlord.propertyManagement}</td>
+    propertyManagement: string
+                  <td><LandlordDetail landlordID={landlord.id} propertyManagement={landlord.propertyManagement} sessionToken={this.props.sessionToken}/></td>
                   <td>{landlord.rating}</td>
-                  <td>
+                  {localStorage.getItem("admin") === "true" ?
+                      (<>
+                      <td>
                     <LandlordEdit
                       id={landlord.id}
                       propertyManagement={landlord.propertyManagement}
@@ -87,6 +104,7 @@ export default class LandlordDisplay extends Component<
                       sessionToken={this.props.sessionToken}
                     />
                   </td>
+                  </>) : <></>}
                 </tr>
               );
             })}

@@ -27,7 +27,6 @@ type AppState = {
       }
       this.updateToken = this.updateToken.bind(this);
       this.clearSession = this.clearSession.bind(this);
-      this.getUserId = this.getUserId.bind(this);
     }
   
     componentDidMount(){
@@ -46,10 +45,6 @@ type AppState = {
       }
       this.setState({sessionToken: newToken, sessionID: newUserId, admin: isAdmin, isUserAuthenticated: true})
     }
-
-    getUserId() {
-      return this.state.sessionID;
-    }
   
     clearSession(){
       localStorage.clear();
@@ -66,7 +61,7 @@ type AppState = {
 
       return(localStorage.token === this.state.sessionToken && this.state.sessionToken !== '' ?
         <Router>
-          <Navbar clickLogout={this.clearSession} isUserAuthenticated={this.state.isUserAuthenticated} sessionToken={this.state.sessionToken} sessionID={this.getUserId}/>
+          <Navbar clickLogout={this.clearSession} isUserAuthenticated={this.state.isUserAuthenticated} sessionToken={this.state.sessionToken} sessionID={this.state.sessionID}/>
         </Router> 
         
         : <Auth updateToken={this.updateToken} /> )
@@ -76,9 +71,10 @@ type AppState = {
     let view;
 
     if(this.state.isUserAuthenticated){
-      view = (<Router>
-      <Navbar clickLogout={this.clearSession} isUserAuthenticated={this.state.isUserAuthenticated} sessionToken={this.state.sessionToken} sessionID={this.getUserId}/><h1>Component</h1>
-    </Router> )
+      view = (
+      <Router>
+        <Navbar clickLogout={this.clearSession} isUserAuthenticated={this.state.isUserAuthenticated} sessionToken={this.state.sessionToken} sessionID={this.state.sessionID}/><h1>Component</h1>
+      </Router> )
     } else {
       view = <Auth updateToken={this.updateToken} />
     }
@@ -86,7 +82,7 @@ type AppState = {
     return (
       <div className="App">
       {view}
-     
+    
       </div>
     );
   }

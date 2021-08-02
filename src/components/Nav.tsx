@@ -17,7 +17,7 @@ type AcceptedProps = {
     clickLogout: () => void,
     isUserAuthenticated: boolean,
     sessionToken: string | null,
-    sessionID: () => number | null,
+    sessionID: number | null,
     
 }
 
@@ -82,7 +82,7 @@ const NavBar = (props: AcceptedProps) => {
                         {/* <Route exact path="/login" component={ Login } /> */}
                         <Route exact path="/home" component={ Home } />
                         <Route exact path="/landlords"  ><LandlordDisplay sessionToken={props.sessionToken}/></Route>
-                        <Route exact path="/reviews" ><Review  sessionToken={props.sessionToken}/></Route>
+                        <Route exact path="/reviews" ><Review sessionID={props.sessionID} sessionToken={props.sessionToken}/></Route>
                         <Route exact path="/profile" ><Profile sessionID={props.sessionID} sessionToken={props.sessionToken}/></Route>
                     </Switch>
                     {/* </Router> */}

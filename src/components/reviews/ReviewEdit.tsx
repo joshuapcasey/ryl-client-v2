@@ -9,7 +9,7 @@ type Props = {
     propertyAddress: string,
     rent: number,
     comment: string
-    id: number
+     id: number
 }
 
 type State = {
@@ -42,11 +42,10 @@ class ReviewEdit extends React.Component  <Props, State> {
             Authorization: this.props.sessionToken,
         };
         try{
-        const res = await fetch(`${APIURL}/review/${this.props.id}/admin`, {
+        const res = await fetch(`${APIURL}/review/${this.props.id}/${this.props.landlordID}`, {
             method: "PUT",
             body: JSON.stringify({
-                landlord: {
-                    landlordID: this.state.landlordID,
+                review: {
                     propertyAddress: this.state.propertyAddress,
                     rent: this.state.rent,
                     comment: this.state.comment
@@ -75,12 +74,47 @@ class ReviewEdit extends React.Component  <Props, State> {
 
     render () {
         return (
-            <div className="Container">
-                <div className="ReviewEditWrapper">
-                    ReviewEdit page
-                </div>
-            </div>
-        )
+            <div>
+        <Button onClick={this.toggle}>Edit</Button>
+        <Modal isOpen={this.state.modalOpen} toggle={this.toggle} >
+            <ModalHeader toggle={this.toggle}>Edit Landlord</ModalHeader>
+            <ModalBody>
+                <Form>
+                <FormGroup>
+                    <Label for="propertyAddress">Property Address </Label>
+                    <Input 
+                        type="text" 
+                        name="propertyAddress" 
+                        id="propertyAddress" 
+                        placeholder="Address" 
+                        onChange={(e) => this.setState({propertyAddress: e.target.value})}
+                        value={this.state.propertyAddress}/>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="rent">Rent</Label>
+                    <Input 
+                        type="number" 
+                        name="rent" 
+                        id="rent" 
+                        onChange={(e) => this.setState({rent: parseInt(e.target.value)})}
+                        value={this.state.rent}> 
+                    </Input>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="Comment">Comment </Label>
+                    <Input type="text" name="Comment" id="Comment" placeholder="Comment" onChange={(e) => this.setState({comment: e.target.value})}
+                    value={this.state.comment}/>
+                </FormGroup>
+                </Form>
+        
+            </ModalBody>
+            <ModalFooter>
+            <Button color="primary"onClick={this.editReview}>Update</Button>{' '}
+            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            </ModalFooter>
+        </Modal>
+        </div>
+    );
     }
 
 }

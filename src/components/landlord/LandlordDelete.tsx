@@ -42,29 +42,29 @@ class LandlordDelete extends React.Component<Props, State> {
         }
     }
 
-   toggle(){
-       this.setState({
-           modalOpen: !this.state.modalOpen
-       })
-   }
+    toggle(){
+        this.setState({
+            modalOpen: !this.state.modalOpen
+        })
+    }
 
-render(){
-  return (
-    <div>
-      <Button onClick={this.toggle}>Delete</Button>
-      <Modal isOpen={this.state.modalOpen} toggle={this.toggle} >
-        <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-        <ModalBody>
-            Are you sure you want to delete this landlord?
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary"onClick={this.deleteLandlord}>Delete</Button>{' '}
-          <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-        </ModalFooter>
-      </Modal>
-    </div>
-  );
-}
+    render(){
+        return (
+            <div>
+            <Button onClick={this.toggle}>Delete</Button>
+            <Modal isOpen={this.state.modalOpen} toggle={this.toggle} >
+                <ModalHeader toggle={this.toggle}>Delete Landlord</ModalHeader>
+                <ModalBody>
+                    Are you sure you want to delete this landlord?
+                </ModalBody>
+                <ModalFooter>
+                <Button color="primary"onClick={this.deleteLandlord}>Delete</Button>{' '}
+                <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                </ModalFooter>
+            </Modal>
+            </div>
+        );
+    }
 }
 
 export default LandlordDelete;

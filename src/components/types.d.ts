@@ -8,7 +8,8 @@ type Review = {
     landlordID: number,
     propertyAddress: string,
     rent: number,
-    comment: string
+    comment: string,
+    id: number
 }
 
 type User = {
