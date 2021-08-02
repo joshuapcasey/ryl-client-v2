@@ -63,10 +63,10 @@ const NavBar = (props: AcceptedProps) => {
                                 <Link to="/home" className="site-link">Home</Link>
                             </NavItem>
                             <NavItem>
-                                <Link to="/reviews" className="site-link">Reviews</Link>
+                                <Link to="/landlords" className="site-link">Landlords</Link>
                             </NavItem>
                             <NavItem>
-                                <Link to="/landlords" className="site-link">Landlords </Link>
+                                <Link to="/reviews" className="site-link">My Reviews </Link>
                             </NavItem>
                             <NavItem>
                                 <Link to="/Profile" className="site-link"> Profile</Link>
