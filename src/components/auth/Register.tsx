@@ -95,7 +95,7 @@ export default class Register extends React.Component<AcceptedProps, RegisterSta
         return(
             <>
                 {this.state.loading ?  <LoaderDiv>
-                            <Loader type='Grid' color='#FF9F1C' />
+                            <Loader type='Watch' color='#27aa9d' />
                         </LoaderDiv> :
             <RegisterDiv className='register'>
 

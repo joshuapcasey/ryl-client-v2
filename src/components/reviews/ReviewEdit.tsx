@@ -9,7 +9,7 @@ type Props = {
     propertyAddress: string,
     rent: number,
     comment: string
-     id: number
+    id: number
 }
 
 type State = {
