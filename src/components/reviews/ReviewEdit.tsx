@@ -1,21 +1,77 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Form, FormGroup, Label, Input, } from 'reactstrap';
+import APIURL from '../../helpers/environment'
 
-
-type AcceptedProps = {
-    sessionToken: string | null;
-
+type Props = {
+    sessionToken: string | null,
+    landlordID: number,
+    propertyAddress: string,
+    rent: number,
+    comment: string
+    id: number
 }
 
-type ReviewEditState = {
+type State = {
+    modalOpen: boolean
+    landlordID: number,
+    propertyAddress: string,
+    rent: number,
+    comment: string
+}
+
+
+class ReviewEdit extends React.Component  <Props, State> {
+    constructor(props: Props) {
+    super(props);
+    this.state = {
+        modalOpen: false,
+        landlordID: 0,
+        propertyAddress: '',
+        rent: 0,
+        comment: ''
+    }
+
+    this.toggle = this.toggle.bind(this);
+    this.editReview = this.editReview.bind(this);
+    }
+
+    editReview = async() => {
+        let requestHeaders: any = {
+            "Content-Type": "application/json",
+            Authorization: this.props.sessionToken,
+        };
+        try{
+        const res = await fetch(`${APIURL}/review/${this.props.id}/admin`, {
+            method: "PUT",
+            body: JSON.stringify({
+                landlord: {
+                    landlordID: this.state.landlordID,
+                    propertyAddress: this.state.propertyAddress,
+                    rent: this.state.rent,
+                    comment: this.state.comment
+                }
+            }),
+            headers: requestHeaders
+        })
+
+        const data = await res.json();
+        console.log(`Data: ${data}`)
+        this.toggle();
+        } catch (err){
+            console.log(err)
+        }
+    }
     
 
-}
-
-export default class ReviewEdit extends Component  <AcceptedProps, ReviewEditState> {
-    constructor(props: AcceptedProps) {
-    super(props);
-    // this.state = {
+    toggle(){
+        this.setState({
+            modalOpen: !this.state.modalOpen
+        })
     }
+
+
+
 
     render () {
         return (
@@ -28,3 +84,5 @@ export default class ReviewEdit extends Component  <AcceptedProps, ReviewEditSta
     }
 
 }
+
+export default ReviewEdit;

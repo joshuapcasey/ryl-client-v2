@@ -36,7 +36,7 @@ class LandlordAdd extends Component  <Props, State> {
         };
         try{
         const res = await fetch(`${APIURL}/landlord/${this.props.id}/admin`, {
-            method: "PUT",
+            method: "CREATE",
             body: JSON.stringify({
                 landlord: {
                     propertyManagement: this.state.propertyManagement,

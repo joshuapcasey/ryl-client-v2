@@ -6,11 +6,11 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Home from "./Home";
 import Landlord from "./landlord/LandlordDisplay";
-import Profile from "./user/UserGet";
+import Profile from "./user/UserDisplay";
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import Review from './reviews/ReviewGet';
+import Review from './reviews/ReviewDisplay';
 import LandlordDisplay from './landlord/LandlordDisplay';
 
 type AcceptedProps = {

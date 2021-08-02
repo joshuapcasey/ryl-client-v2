@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import APIURL from '../../helpers/environment';
-import LandlordEdit from './LandlordEdit';
-import LandlordDelete from './LandlordDelete';
+import APIURL from "../../helpers/environment";
+import LandlordEdit from "./LandlordEdit";
+import LandlordDelete from "./LandlordDelete";
+import LandlordAdd from "./LandlordAdd";
 
 type AcceptedProps = {
-  sessionToken: string | null
+  sessionToken: string | null;
 };
 
 type LandlordDisplayState = {
-    landlords: Landlord[]
-    propertyManagement: string;
-    rating: number;
+  landlords: Landlord[];
+  propertyManagement: string;
+  rating: number;
 };
 
 export default class LandlordDisplay extends Component<
@@ -22,7 +23,7 @@ export default class LandlordDisplay extends Component<
     this.state = {
       landlords: [],
       propertyManagement: "",
-        rating: 0
+      rating: 0,
     };
   }
   componentDidMount() {
@@ -58,29 +59,37 @@ export default class LandlordDisplay extends Component<
               <th scope="col">Rating</th>
               <th scope="col">Edit</th>
               <th scope="col">Delete</th>
-              {/* <LandlordDelete id={landlord.id} sessionToken={this.props.sessionToken}/> */}
+              {/* <LandlordAdd
+                id={this.state.id}
+                propertyManagement={this.state.propertyManagement}
+                rating={this.state.rating}
+                sessionToken={this.props.sessionToken}
+              /> */}
             </tr>
           </thead>
           <tbody>
-            {
-              this.state.landlords.map((landlord: Landlord, index: number) => {
-                return (
-                  <tr
-                    
-                  >
-                    <td>{landlord.propertyManagement}</td>
-                    <td>{landlord.rating}</td>
-                    {/* <td>{"$".repeat(landlord.price_range)}</td> */}
-                    {/* <td>{renderRating(landlord)}</td> */}
-                    <td>
-                     <LandlordEdit id={landlord.id} propertyManagement={landlord.propertyManagement} rating={landlord.rating} sessionToken={this.props.sessionToken} />
-                    </td>
-                    <td>
-                      <LandlordDelete id={landlord.id} sessionToken={this.props.sessionToken}/>
-                    </td>
-                  </tr>
-                );
-              })}
+            {this.state.landlords.map((landlord: Landlord, index: number) => {
+              return (
+                <tr>
+                  <td>{landlord.propertyManagement}</td>
+                  <td>{landlord.rating}</td>
+                  <td>
+                    <LandlordEdit
+                      id={landlord.id}
+                      propertyManagement={landlord.propertyManagement}
+                      rating={landlord.rating}
+                      sessionToken={this.props.sessionToken}
+                    />
+                  </td>
+                  <td>
+                    <LandlordDelete
+                      id={landlord.id}
+                      sessionToken={this.props.sessionToken}
+                    />
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
