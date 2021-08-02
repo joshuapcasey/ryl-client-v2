@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 
 
-type AcceptedProps = {
+type Props = {
     // updateToken: (newToken: string, newUserId: number, newRole: string) => void
 }
 
-type HomeState = {
+type State = {
     
 
 }
 
-export default class Home extends Component   <AcceptedProps, HomeState> {
-    constructor(props: AcceptedProps) {
+export default class Footer extends Component   <Props, State> {
+    constructor(props: Props) {
     super(props);
     // this.state = {
     }
@@ -19,9 +19,13 @@ export default class Home extends Component   <AcceptedProps, HomeState> {
     render () {
         return (
             <div className="FooterWrapper">
-                Footer
+                <footer>
+                    <br/>
+                    <h5>&copy; 2021 JpC </h5>
+                    <br/>
+                </footer>
             </div>
-        )
+    );
     }
 
 }

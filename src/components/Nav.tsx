@@ -5,18 +5,19 @@ import { Link, Route, Switch } from 'react-router-dom';
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Home from "./Home";
-import Landlord from "./landlord/LandlordGet";
-import Profile from "./user/UserGet";
+import Landlord from "./landlord/LandlordDisplay";
+import Profile from "./user/UserDisplay";
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import Review from './reviews/ReviewGet';
+import Review from './reviews/ReviewDisplay';
+import LandlordDisplay from './landlord/LandlordDisplay';
 
 type AcceptedProps = {
     clickLogout: () => void,
     isUserAuthenticated: boolean,
     sessionToken: string | null,
-    sessionID: () => number | null,
+    sessionID: number | null,
     
 }
 
@@ -80,15 +81,14 @@ const NavBar = (props: AcceptedProps) => {
                     <Switch>
                         {/* <Route exact path="/login" component={ Login } /> */}
                         <Route exact path="/home" component={ Home } />
-                        <Route exact path="/landlords"  ><Landlord sessionToken={props.sessionToken}/></Route>
-                        <Route exact path="/reviews" ><Review  sessionToken={props.sessionToken}/></Route>
+                        <Route exact path="/landlords"  ><LandlordDisplay sessionToken={props.sessionToken}/></Route>
+                        <Route exact path="/reviews" ><Review sessionID={props.sessionID} sessionToken={props.sessionToken}/></Route>
                         <Route exact path="/profile" ><Profile sessionID={props.sessionID} sessionToken={props.sessionToken}/></Route>
                     </Switch>
                     {/* </Router> */}
                 </div>
             </div>
         );
-    // };
 }
 
 export default NavBar;
